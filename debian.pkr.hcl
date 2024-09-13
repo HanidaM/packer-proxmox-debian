@@ -262,4 +262,16 @@ source "proxmox-iso" "debian12" {
 
 build {
     sources = ["source.proxmox-iso.debian12"]
+
+
+        provisioner "shell" {
+        inline = [
+            "sudo apt-get update -y",
+            "sudo apt-get install qemu-guest-agent cloud-init -y",
+            "sudo systemctl start qemu-guest-agent",
+            "sudo systemctl start cloud-init",
+            "echo 'QEMU Guest Agent and cloud-init installation and setup completed '"
+        ]
+    }
+
 }
